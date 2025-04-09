@@ -42,7 +42,7 @@ Você verá logs como:
 [NOTIFY] Spawning in 10 min: Chaos Queen (Ice 1), Blood Prince (Lost 1), Babel (Iron 1)
 ```
 
-🚨 Aviso
+## 🚨 Aviso
 
     O script precisa permanecer aberto enquanto você quiser receber as notificações.
 
@@ -50,6 +50,6 @@ Você verá logs como:
 
 Feito com carinho para a comunidade de Priston Tale EU. 💙
 
-📜 Licença
+## 📜 Licença
 
 MIT License — use à vontade, só não venda como se fosse seu. ❤️
