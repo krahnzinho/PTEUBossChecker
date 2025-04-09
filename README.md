@@ -25,7 +25,7 @@ Uma ferramenta simples em PowerShell para alertá-lo minutos antes dos bosses ap
 | Mokova        | Lost 2            |
 | Babel         | Iron 1            |
 
-Outros bosses estão incluídos na programação, mas ainda não possuem localização confirmada.
+Outras localizações de bosses serão incluídas no script em breve.
 
 ## 💡 Como usar
 
@@ -37,9 +37,10 @@ Outros bosses estão incluídos na programação, mas ainda não possuem localiz
 powershell -ExecutionPolicy Bypass -File .\PTEUBossNotifier.ps1
 ```
 Você verá logs como:
-
-[LOG] Local: 13:20 | São Paulo: 12:20
+```
+[LOG] Local: 13:20 | São Paulo: 12:20  
 [NOTIFY] Spawning in 10 min: Chaos Queen (Ice 1), Blood Prince (Lost 1), Babel (Iron 1)
+```
 
 🚨 Aviso
 
