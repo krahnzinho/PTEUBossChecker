@@ -1,5 +1,9 @@
 Write-Host "Boss Notifier is running... Press Ctrl+C to stop."
 
+#auto detects local timezone
+$localOffset = [System.TimeZoneInfo]::Local.BaseUtcOffset.TotalHours
+$timezoneOffset = -3 - $localOffset
+
 $bossSchedule = @(
     @{ Hour = 11; Bosses = @("Valento", "Kelvezu", "Gorgoniac", "Draxos", "Eadric/Vault") }
     @{ Hour = 12; Bosses = @("Chaos Queen", "Blood Prince", "Devil Shy", "Primal Golem", "Deius") }
@@ -54,10 +58,14 @@ function Show-ToastNotification {
 
 # Loop infinito (pressione Ctrl+C para parar)
 while ($true) {
-    $now = Get-Date
+    $nowLocal = Get-Date
+    $nowUTC = $nowLocal.ToUniversalTime()
+    $nowSP = $nowUTC.addHours(-3)
+
     $checkHour = $now.Hour
     $checkMinute = $now.Minute
-    Write-Host "[LOG] Verificando: $($now.ToString("HH:mm"))"
+
+    Write-Host "[LOG] Local: $($nowLocal.ToString("HH:mm")) | São Paulo: $($nowSP.ToString("HH:mm"))"
 
     if ($checkMinute -eq 20) {
         $entry = $bossSchedule | Where-Object { $_.Hour -eq $checkHour }
@@ -69,9 +77,9 @@ while ($true) {
 
             $message = "Spawning in 10 min: " + ($bossList -join ", ")
             Write-Host "[NOTIFY] $message"
-            Show-ToastNotification -title "⏰ Boss Reminder" -message $message
+            Show-ToastNotification -title "Boss Reminder" -message $message
         } else {
-            Write-Host "[INFO] Nenhum boss previsto para essa hora."
+            Write-Host "[INFO] No boss is going to spawn now."
         }
     }
 
