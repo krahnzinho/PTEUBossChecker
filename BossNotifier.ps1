@@ -5,7 +5,7 @@ $notifyMinutesBeforeSpawn = 10
 
 #auto detects local timezone
 $localOffset = [System.TimeZoneInfo]::Local.BaseUtcOffset.TotalHours
-$timezoneOffset = -3 - $localOffset
+$timezoneOffset = -3 - $localOffset #adapts from brazilian timezone
 
 $bossSchedule = @(
     @{ Hour = 11; Bosses = @("Valento", "Kelvezu", "Gorgoniac", "Draxos", "Eadric/Vault") }
@@ -66,41 +66,39 @@ function Show-ToastNotification {
 }
 
 #did I already notify you?
-$lastHourNotified = -1
-$lastMinuteNotified = -1
+$lastNotification = ""
 
 # Loop infinito (ctrl+c to stop)
 while ($true) {
     $nowLocal = Get-Date
     $nowUTC = $nowLocal.ToUniversalTime()
-    $nowSP = $nowUTC.addHours(-3)
+    $nowSP = $nowUTC.AddHours(-3)
 
-    $checkHour = $now.Hour
-    $checkMinute = $now.Minute
+    $checkHour = $nowSP.Hour
+    $checkMinute = $nowSP.Minute
+    $currentTimeKey = "{0:00}:{1:00}" -f $checkHour, $checkMinute
 
-    Write-Host "[LOG] Local: $($nowLocal.ToString("HH:mm")) | São Paulo: $($nowSP.ToString("HH:mm"))"
+    Write-Host "[LOG] Local: $($nowLocal.ToString("HH:mm")) | São Paulo/Brasilia: $($nowSP.ToString("HH:mm"))"
 
-    $targetHour = ($checkHour + [math]::Floor(($checkMinute + $notifyMinutesBeforeSpawn) / 60)) % 24
-    $targetMinute = ($checkMinute + $notifyMinutesBeforeSpawn) % 60
+    $spawnMinute = 30
+    $notificationMinute = ($spawnMinute - $notifyMinutesBeforeSpawn) % 60
 
-    $expectedMinute = (60 + $targetMinute - $notifyMinutesBeforeSpawn) % 60
-    if (($checkMinute -eq $expectedMinute -or $checkMinute -eq $expectedMinute + 1 -or $checkMinute -eq $expectedMinute - 1) -and $checkHour -ne $lastHourNotified) {
+    $shouldCheck = $checkMinute -eq $notificationMinute
+    $isNewNotification = $currentTimeKey -ne $lastNotificationTime
+
+    if ($shouldCheck -and $isNewNotification) {
+        $targetHour = ($checkHour + [math]::Floor(($checkMinute + $notifyMinutesBeforeSpawn) / 60)) % 24
         $entry = $bossSchedule | Where-Object { $_.Hour -eq $targetHour }
         if ($entry) {
             $bossList = $entry.Bosses | ForEach-Object {
-                $loc = if ($locations.ContainsKey($_)) { "$_ ($($locations[$_]))" } else { $_ }
-                $loc
+                if ($locations.ContainsKey($_)) { "$_ ($($locations[$_]))" } else { $_ }
             }
-
             $message = "Spawning in $notifyMinutesBeforeSpawn min: " + ($bossList -join ", ")
             Write-Host "[NOTIFY] $message"
-            Show-ToastNotification -title "⏰ Boss Reminder" -message $message
-            $lastHourNotified = $checkHour
-            $lastMinuteNotified = $checkMinute
-        } else {
-            Write-Host "[INFO] no boss is going to spawn right now"
+            Show-ToastNotification -title "Boss Reminder" -message $message
+            $lastNotificationTime = $currentTimeKey
         }
     }
 
-    Start-Sleep -Seconds 60
+    Start-Sleep -Seconds 5
 }
