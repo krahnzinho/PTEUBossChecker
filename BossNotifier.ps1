@@ -78,7 +78,7 @@ while ($true) {
     $checkMinute = $nowSP.Minute
     $currentTimeKey = "{0:00}:{1:00}" -f $checkHour, $checkMinute
 
-    Write-Host "[LOG] Local: $($nowLocal.ToString("HH:mm")) | São Paulo/Brasilia: $($nowSP.ToString("HH:mm"))"
+    Write-Host "[LOG] Local: $($nowLocal.ToString("HH:mm")) | São Paulo/Brasilia: $($nowSP.ToString("HH:mm")), next check will be in 20 seconds..."
 
     $spawnMinute = 30
     $notificationMinute = ($spawnMinute - $notifyMinutesBeforeSpawn) % 60
