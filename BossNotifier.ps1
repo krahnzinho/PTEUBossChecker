@@ -61,7 +61,7 @@ function Show-ToastNotification {
     $balloon.Visible = $true
     $balloon.ShowBalloonTip(10000)
 
-    Start-Sleep -Seconds 12
+    Start-Sleep -Seconds 10
     $balloon.Dispose()
 }
 
@@ -100,5 +100,5 @@ while ($true) {
         }
     }
 
-    Start-Sleep -Seconds 5
+    Start-Sleep -Seconds 20
 }
