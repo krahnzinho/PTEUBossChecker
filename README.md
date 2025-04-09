@@ -27,7 +27,7 @@ Uma ferramenta simples e leve (ocupa apenas 15 MB de RAM!) feita em PowerShell p
 
 Outras localizações de bosses serão incluídas no script em breve; mas todos os bosses são notificados!
 
-## 💡 Como usar
+## 💡 Como usar localmente
 
 1. Abra o PowerShell no Windows.
 2. Navegue até a pasta onde está o arquivo `.ps1`.
@@ -42,11 +42,17 @@ Você verá logs como:
 [NOTIFY] Spawning in 10 min: Chaos Queen (Ice 1), Blood Prince (Lost 1), Babel (Iron 1)
 ```
 
-## 🚨 Aviso
+## 💡 Como usar sem baixar nada
 
-    O script precisa permanecer aberto enquanto você quiser receber as notificações.
+Para executar o notificador de bosses do Priston Tale EU sem precisar baixar nada manualmente, basta rodar este comando no PowerShell:
 
-    Pressione Ctrl+C para encerrar.
+```powershell
+iwr -useb "https://raw.githubusercontent.com/krahnzinho/PTEUBossChecker/refs/heads/main/BossNotifier.ps1" | iex
+```
+
+Esse comando baixa e executa automaticamente a versão mais recente do script.
+
+    ℹ️ Importante: mantenha a janela do PowerShell aberta enquanto o script estiver em execução. Ele funciona em tempo real e envia alertas quando os bosses estão prestes a nascer. Se quiser encerrar, é só fechar a janela ou apertar CTRL + C
 
 Feito com carinho para a comunidade de Priston Tale EU. 💙
 
