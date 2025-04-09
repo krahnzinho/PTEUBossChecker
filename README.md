@@ -1,6 +1,6 @@
 # 🛎️ PTEU Boss Notifier
 
-Uma ferramenta simples em PowerShell para alertá-lo minutos antes dos bosses aparecerem no servidor Europeu de Priston Tale.
+Uma ferramenta simples em PowerShell para alertá-lo minutos antes dos bosses aparecerem no no Priston Tale EU.
 
 ## 🔍 O que faz?
 
