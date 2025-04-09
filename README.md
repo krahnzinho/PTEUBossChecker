@@ -52,7 +52,7 @@ iwr -useb "https://raw.githubusercontent.com/krahnzinho/PTEUBossChecker/refs/hea
 
 Esse comando baixa e executa automaticamente a versão mais recente do script.
 
-    ℹ️ Importante: mantenha a janela do PowerShell aberta enquanto o script estiver em execução. Ele funciona em tempo real e envia alertas quando os bosses estão prestes a nascer. Se quiser encerrar, é só fechar a janela ou apertar CTRL + C
+ℹ️ Importante: mantenha a janela do PowerShell aberta enquanto o script estiver em execução. Ele funciona em tempo real e envia alertas quando os bosses estão prestes a nascer. Se quiser encerrar, é só fechar a janela ou apertar CTRL + C
 
 Feito com carinho para a comunidade de Priston Tale EU. 💙
 
