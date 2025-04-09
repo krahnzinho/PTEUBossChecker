@@ -34,7 +34,7 @@ $bossSchedule = @(
     @{ Hour = 10; Bosses = @("Chaos Queen", "Mokova", "Ignis", "Deius") }
 )
 
-# Localizações conhecidas
+# boss locations
 $locations = @{
     "Chaos Queen" = "Ice 1"
     "Valento" = "Ice 2"
@@ -44,7 +44,7 @@ $locations = @{
     "Babel" = "Iron 1"
 }
 
-# Função para mostrar notificação toast no Windows
+# show toast
 function Show-ToastNotification {
     param (
         [string]$title,
@@ -69,7 +69,7 @@ function Show-ToastNotification {
 $lastHourNotified = -1
 $lastMinuteNotified = -1
 
-# Loop infinito (pressione Ctrl+C para parar)
+# Loop infinito (ctrl+c to stop)
 while ($true) {
     $nowLocal = Get-Date
     $nowUTC = $nowLocal.ToUniversalTime()
