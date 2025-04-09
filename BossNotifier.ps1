@@ -83,7 +83,8 @@ while ($true) {
     $targetHour = ($checkHour + [math]::Floor(($checkMinute + $notifyMinutesBeforeSpawn) / 60)) % 24
     $targetMinute = ($checkMinute + $notifyMinutesBeforeSpawn) % 60
 
-    if ($checkMinute -eq (60 + $targetMinute - $notifyMinutesBeforeSpawn) % 60 -and $checkHour -ne $lastHourNotified -and $checkMinute -ne $lastMinuteNotified) {
+    $expectedMinute = (60 + $targetMinute - $notifyMinutesBeforeSpawn) % 60
+    if (($checkMinute -eq $expectedMinute -or $checkMinute -eq $expectedMinute + 1 -or $checkMinute -eq $expectedMinute - 1) -and $checkHour -ne $lastHourNotified) {
         $entry = $bossSchedule | Where-Object { $_.Hour -eq $targetHour }
         if ($entry) {
             $bossList = $entry.Bosses | ForEach-Object {
