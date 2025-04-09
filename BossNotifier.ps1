@@ -1,5 +1,8 @@
 Write-Host "Boss Notifier is running... Press Ctrl+C to stop."
 
+#when do you want to be notified, in minutes?
+$notifyMinutesBeforeSpawn = 10
+
 #auto detects local timezone
 $localOffset = [System.TimeZoneInfo]::Local.BaseUtcOffset.TotalHours
 $timezoneOffset = -3 - $localOffset
@@ -38,6 +41,7 @@ $locations = @{
     "Kelvezu" = "Kelvezu Lair"
     "Blood Prince" = "Lost 1"
     "Mokova" = "Lost 2"
+    "Babel" = "Iron 1"
 }
 
 # Função para mostrar notificação toast no Windows
@@ -47,14 +51,23 @@ function Show-ToastNotification {
         [string]$message
     )
     Add-Type -AssemblyName System.Windows.Forms
+    Add-Type -AssemblyName System.Drawing
+
     $balloon = New-Object System.Windows.Forms.NotifyIcon
     $balloon.Icon = [System.Drawing.SystemIcons]::Information
-    $balloon.BalloonTipIcon = "Info"
+    $balloon.BalloonTipIcon = [System.Windows.Forms.ToolTipIcon]::Info
     $balloon.BalloonTipText = $message
     $balloon.BalloonTipTitle = $title
     $balloon.Visible = $true
     $balloon.ShowBalloonTip(10000)
+
+    Start-Sleep -Seconds 12
+    $balloon.Dispose()
 }
+
+#did I already notify you?
+$lastHourNotified = -1
+$lastMinuteNotified = -1
 
 # Loop infinito (pressione Ctrl+C para parar)
 while ($true) {
@@ -67,19 +80,24 @@ while ($true) {
 
     Write-Host "[LOG] Local: $($nowLocal.ToString("HH:mm")) | São Paulo: $($nowSP.ToString("HH:mm"))"
 
-    if ($checkMinute -eq 20) {
-        $entry = $bossSchedule | Where-Object { $_.Hour -eq $checkHour }
+    $targetHour = ($checkHour + [math]::Floor(($checkMinute + $notifyMinutesBeforeSpawn) / 60)) % 24
+    $targetMinute = ($checkMinute + $notifyMinutesBeforeSpawn) % 60
+
+    if ($checkMinute -eq (60 + $targetMinute - $notifyMinutesBeforeSpawn) % 60 -and $checkHour -ne $lastHourNotified -and $checkMinute -ne $lastMinuteNotified) {
+        $entry = $bossSchedule | Where-Object { $_.Hour -eq $targetHour }
         if ($entry) {
             $bossList = $entry.Bosses | ForEach-Object {
                 $loc = if ($locations.ContainsKey($_)) { "$_ ($($locations[$_]))" } else { $_ }
                 $loc
             }
 
-            $message = "Spawning in 10 min: " + ($bossList -join ", ")
+            $message = "Spawning in $notifyMinutesBeforeSpawn min: " + ($bossList -join ", ")
             Write-Host "[NOTIFY] $message"
-            Show-ToastNotification -title "Boss Reminder" -message $message
+            Show-ToastNotification -title "⏰ Boss Reminder" -message $message
+            $lastHourNotified = $checkHour
+            $lastMinuteNotified = $checkMinute
         } else {
-            Write-Host "[INFO] No boss is going to spawn now."
+            Write-Host "[INFO] no boss is going to spawn right now"
         }
     }
 
