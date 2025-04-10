@@ -8,30 +8,30 @@ $localOffset = [System.TimeZoneInfo]::Local.BaseUtcOffset.TotalHours
 $timezoneOffset = -3 - $localOffset #adapts from brazilian timezone
 
 $bossSchedule = @(
-    @{ Hour = 11; Bosses = @("Valento", "Kelvezu", "Gorgoniac", "Draxos", "Eadric/Vault") }
-    @{ Hour = 12; Bosses = @("Chaos Queen", "Blood Prince", "Devil Shy", "Primal Golem", "Deius") }
-    @{ Hour = 13; Bosses = @("Valento", "Mokova", "Tulla") }
-    @{ Hour = 14; Bosses = @("Chaos Queen", "Kelvezu", "Gorgoniac", "Deius", "Greedy", "Aragonian", "Eadric/Vault") }
-    @{ Hour = 15; Bosses = @("Valento", "Blood Prince", "Draxos", "Yagditha") }
-    @{ Hour = 16; Bosses = @("Chaos Queen", "Mokova", "Devil Shy", "Ignis", "Deius") }
-    @{ Hour = 17; Bosses = @("Valento", "Kelvezu", "Gorgoniac", "Tulla", "Eadric/Vault") }
-    @{ Hour = 18; Bosses = @("Chaos Queen", "Blood Prince", "Eadric/Vault", "Primal Golem", "Deius") }
-    @{ Hour = 19; Bosses = @("Valento", "Mokova", "Draxos") }
-    @{ Hour = 20; Bosses = @("Chaos Queen", "Kelvezu", "Gorgoniac", "Devil Shy", "Greedy", "Aragonian", "Eadric/Vault") }
-    @{ Hour = 21; Bosses = @("Valento", "Blood Prince", "Yagditha", "Tulla") }
-    @{ Hour = 22; Bosses = @("Chaos Queen", "Mokova", "Ignis", "Deius") }
-    @{ Hour = 23; Bosses = @("Valento", "Kelvezu", "Gorgoniac", "Draxos", "Eadric/Vault") }
-    @{ Hour = 0; Bosses = @("Chaos Queen", "Blood Prince", "Devil Shy", "Primal Golem", "Deius") }
-    @{ Hour = 1; Bosses = @("Valento", "Mokova", "Tulla") }
-    @{ Hour = 2; Bosses = @("Chaos Queen", "Kelvezu", "Gorgoniac", "Deius", "Greedy", "Aragonian", "Eadric/Vault") }
-    @{ Hour = 3; Bosses = @("Valento", "Blood Prince", "Draxos", "Yagditha") }
-    @{ Hour = 4; Bosses = @("Chaos Queen", "Mokova", "Devil Shy", "Ignis", "Deius") }
-    @{ Hour = 5; Bosses = @("Valento", "Kelvezu", "Gorgoniac", "Tulla", "Eadric/Vault") }
-    @{ Hour = 6; Bosses = @("Chaos Queen", "Blood Prince", "Eadric/Vault", "Primal Golem", "Deius") }
-    @{ Hour = 7; Bosses = @("Valento", "Mokova", "Draxos") }
-    @{ Hour = 8; Bosses = @("Chaos Queen", "Kelvezu", "Gorgoniac", "Devil Shy", "Greedy", "Aragonian", "Eadric/Vault") }
-    @{ Hour = 9; Bosses = @("Valento", "Blood Prince", "Yagditha", "Tulla") }
-    @{ Hour = 10; Bosses = @("Chaos Queen", "Mokova", "Ignis", "Deius") }
+    @{ Hour = 12; Bosses = @("Valento", "Kelvezu", "Gorgoniac", "Draxos", "Eadric/Vault") }
+    @{ Hour = 13; Bosses = @("Chaos Queen", "Blood Prince", "Devil Shy", "Primal Golem", "Deius") }
+    @{ Hour = 14; Bosses = @("Valento", "Mokova", "Tulla") }
+    @{ Hour = 15; Bosses = @("Chaos Queen", "Kelvezu", "Gorgoniac", "Deius", "Greedy", "Aragonian", "Eadric/Vault") }
+    @{ Hour = 16; Bosses = @("Valento", "Blood Prince", "Draxos", "Yagditha") }
+    @{ Hour = 17; Bosses = @("Chaos Queen", "Mokova", "Devil Shy", "Ignis", "Deius") }
+    @{ Hour = 18; Bosses = @("Valento", "Kelvezu", "Gorgoniac", "Tulla", "Eadric/Vault") }
+    @{ Hour = 19; Bosses = @("Chaos Queen", "Blood Prince", "Eadric/Vault", "Primal Golem", "Deius") }
+    @{ Hour = 20; Bosses = @("Valento", "Mokova", "Draxos") }
+    @{ Hour = 21; Bosses = @("Chaos Queen", "Kelvezu", "Gorgoniac", "Devil Shy", "Greedy", "Aragonian", "Eadric/Vault") }
+    @{ Hour = 22; Bosses = @("Valento", "Blood Prince", "Yagditha", "Tulla") }
+    @{ Hour = 23; Bosses = @("Chaos Queen", "Mokova", "Ignis", "Deius") }
+    @{ Hour = 0; Bosses = @("Valento", "Kelvezu", "Gorgoniac", "Draxos", "Eadric/Vault") }
+    @{ Hour = 1; Bosses = @("Chaos Queen", "Blood Prince", "Devil Shy", "Primal Golem", "Deius") }
+    @{ Hour = 2; Bosses = @("Valento", "Mokova", "Tulla") }
+    @{ Hour = 3; Bosses = @("Chaos Queen", "Kelvezu", "Gorgoniac", "Deius", "Greedy", "Aragonian", "Eadric/Vault") }
+    @{ Hour = 4; Bosses = @("Valento", "Blood Prince", "Draxos", "Yagditha") }
+    @{ Hour = 5; Bosses = @("Chaos Queen", "Mokova", "Devil Shy", "Ignis", "Deius") }
+    @{ Hour = 6; Bosses = @("Valento", "Kelvezu", "Gorgoniac", "Tulla", "Eadric/Vault") }
+    @{ Hour = 7; Bosses = @("Chaos Queen", "Blood Prince", "Eadric/Vault", "Primal Golem", "Deius") }
+    @{ Hour = 8; Bosses = @("Valento", "Mokova", "Draxos") }
+    @{ Hour = 9; Bosses = @("Chaos Queen", "Kelvezu", "Gorgoniac", "Devil Shy", "Greedy", "Aragonian", "Eadric/Vault") }
+    @{ Hour = 10; Bosses = @("Valento", "Blood Prince", "Yagditha", "Tulla") }
+    @{ Hour = 11; Bosses = @("Chaos Queen", "Mokova", "Ignis", "Deius") }
 )
 
 # boss locations
